@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DJ's Puzzles | Never Know What You'll Find Inside</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --black: #070707;
+    --dark: #111111;
+    --gold: #d4af37;
+    --gold-light: #f4dc87;
+    --cream: #f7f1df;
+    --grey: #aaa;
+    --white: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--black);
+    color: var(--cream);
+    line-height: 1.6;
+}
+
+/* NAVIGATION */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(7,7,7,.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,175,55,.2);
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+}
+
+nav a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: .9rem;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 130px 20px 80px;
+    background:
+        radial-gradient(circle at center, rgba(212,175,55,.15), transparent 35%),
+        linear-gradient(135deg,#070707,#18140a,#070707);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: .8rem;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(4rem,10vw,8rem);
+    line-height: .9;
+    margin-bottom: 25px;
+}
+
+h1 span {
+    color: var(--gold);
+}
+
+.slogan {
+    color: var(--grey);
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-bottom: 35px;
+}
+
+.button {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: .8rem;
+    transition: .3s;
+    cursor: pointer;
+    background: transparent;
+}
+
+.button:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* GENERAL */
+
+section {
+    padding: 100px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title small {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.section-title h2 {
+    font-size: 3rem;
+    margin-top: 8px;
+}
+
+/* FEATURED */
+
+.featured {
+    background: #0e0e0e;
+}
+
+.products {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.card {
+    background: linear-gradient(145deg,#171717,#0c0c0c);
+    border: 1px solid rgba(212,175,55,.2);
+    padding: 20px;
+    transition: .4s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 40px rgba(212,175,55,.1);
+}
+
+.card-image {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #090909;
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: var(--cream);
+    margin-bottom: 5px;
+}
+
+.card p {
+    color: var(--grey);
+}
+
+.price {
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin: 12px 0;
+}
+
+/* MYSTERY BOXES */
+
+.mystery {
+    background:
+        linear-gradient(rgba(7,7,7,.92),rgba(7,7,7,.95)),
+        radial-gradient(circle,#755b16,#070707);
+}
+
+.boxes {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.box {
+    text-align: center;
+    padding: 40px 25px;
+    border: 1px solid rgba(212,175,55,.3);
+    background: #101010;
+    transition: .3s;
+}
+
+.box:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px);
+}
+
+.box-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.box h3 {
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.box .price {
+    font-size: 1.6rem;
+}
+
+/* REVEAL */
+
+.reveal {
+    text-align: center;
+    background: #0e0e0e;
+}
+
+.mystery-box {
+    max-width: 650px;
+    margin: auto;
+    padding: 50px 30px;
+    border: 1px solid var(--gold);
+}
+
+.gift-box {
+    font-size: 7rem;
+    margin: 20px;
+    transition: .5s;
+}
+
+.reveal-result {
+    min-height: 35px;
+    color: var(--gold-light);
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.opened {
+    transform: rotateY(360deg) scale(1.15);
+}
+
+/* ABOUT */
+
+.about {
+    text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    color: var(--grey);
+    font-size: 1.1rem;
+}
+
+.about-content strong {
+    color: var(--gold);
+}
+
+/* REVIEWS */
+
+.reviews {
+    background: #0e0e0e;
+}
+
+.review-grid {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.review {
+    padding: 30px;
+    border: 1px solid rgba(212,175,55,.2);
+    background: #111;
+}
+
+.stars {
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.review p {
+    color: #bbb;
+    font-style: italic;
+}
+
+.review strong {
+    display: block;
+    color: var(--cream);
+    margin-top: 20px;
+}
+
+/* FAQ */
+
+.faq {
+    max-width: 850px;
+    margin: auto;
+}
+
+details {
+    border-bottom: 1px solid rgba(212,175,55,.25);
+    padding: 20px 0;
+}
+
+summary {
+    cursor: pointer;
+    color: var(--gold);
+    font-size: 1.1rem;
+}
+
+details p {
+    color: var(--grey);
+    padding-top: 15px;
+}
+
+/* NEWSLETTER */
+
+.newsletter {
+    text-align: center;
+    background:
+        linear-gradient(135deg,#17130a,#080808);
+}
+
+.newsletter p {
+    color: var(--grey);
+    margin: 15px auto 25px;
+    max-width: 600px;
+}
+
+.newsletter form {
+    max-width: 550px;
+    margin: auto;
+    display: flex;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 15px;
+    background: #111;
+    color: white;
+    border: 1px solid #444;
+    outline: none;
+}
+
+.newsletter button {
+    border: 1px solid var(--gold);
+    background: var(--gold);
+    padding: 0 25px;
+    cursor: pointer;
+}
+
+/* SOCIAL */
+
+.social {
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: var(--gold);
+    border: 1px solid rgba(212,175,55,.4);
+    padding: 12px 25px;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.social-links a:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* CONTACT */
+
+.contact {
+    text-align: center;
+    background: #0e0e0e;
+}
+
+.contact p {
+    color: var(--grey);
+    margin-bottom: 25px;
+}
+
+.contact-info {
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    background: #050505;
+    border-top: 1px solid rgba(212,175,55,.15);
+    color: #777;
+}
+
+footer strong {
+    color: var(--gold);
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    nav {
+        padding: 15px 4%;
+    }
+
+    nav ul {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: .7rem;
+    }
+
+    .products,
+    .boxes,
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .section-title h2 {
+        font-size: 2.3rem;
+    }
+
+    .newsletter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .newsletter button {
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+    <div class="logo">DJ'S PUZZLES</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#mystery">Mystery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Curated • Unexpected • Unique
+        </div>
+
+        <h1>
+            DJ's <span>Puzzles</span>
+        </h1>
+
+        <p class="slogan">
+            "Never know what you'll find inside."
+        </p>
+
+        <a href="#shop" class="button">
+            Explore The Collection
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED FINDS -->
+
+<section class="featured" id="shop">
+
+    <div class="section-title">
+        <small>Featured Finds</small>
+        <h2>Discover Something Unexpected</h2>
+    </div>
+
+    <div class="products">
+
+        <div class="card">
+            <div class="card-image">💎</div>
+            <h3>Hidden Gem</h3>
+            <p>A unique mystery find.</p>
+            <span class="price">€15.00</span>
+            <button class="button" onclick="addToCart('Hidden Gem')">
+                Add To Collection
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">🎁</div>
+            <h3>Surprise Find</h3>
+            <p>You won't know until it arrives.</p>
+            <span class="price">€25.00</span>
+            <button class="button" onclick="addToCart('Surprise Find')">
+                Add To Collection
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">👑</div>
+            <h3>Luxury Discovery</h3>
+            <p>Something a little more special.</p>
+            <span class="price">€50.00</span>
+            <button class="button" onclick="addToCart('Luxury Discovery')">
+                Add To Collection
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MYSTERY BOXES -->
+
+<section class="mystery" id="mystery">
+
+    <div class="section-title">
+        <small>The Mystery Boxes</small>
+        <h2>Choose Your Puzzle</h2>
+    </div>
+
+    <div class="boxes">
+
+        <div class="box">
+            <div class="box-icon">📦</div>
+            <h3>Curious</h3>
+            <span class="price">€10</span>
+            <p>A little mystery for the curious.</p>
+        </div>
+
+        <div class="box">
+            <div class="box-icon">🎁</div>
+            <h3>Adventurer</h3>
+            <span class="price">€25</span>
+            <p>More surprises. More discoveries.</p>
+        </div>
+
+        <div class="box">
+            <div class="box-icon">👑</div>
+            <h3>Luxury</h3>
+            <span class="price">€50</span>
+            <p>Our premium mystery experience.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MYSTERY REVEAL -->
+
+<section class="reveal">
+
+    <div class="section-title">
+        <small>Feeling Lucky?</small>
+        <h2>Reveal A Mystery</h2>
+    </div>
+
+    <div class="mystery-box">
+
+        <div id="giftBox" class="gift-box">
+            🎁
+        </div>
+
+        <p>
+            Think you know what you'll find?
+        </p>
+
+        <div id="revealResult" class="reveal-result">
+            Click the button to reveal your mystery.
+        </div>
+
+        <button class="button" onclick="revealMystery()">
+            Reveal The Mystery
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="section-title">
+        <small>The Story</small>
+        <h2>Expect The Unexpected</h2>
+    </div>
+
+    <div class="about-content">
+
+        <p>
+            Welcome to <strong>DJ's Puzzles</strong> — where curiosity
+            meets opportunity.
+        </p>
+
+        <br>
+
+        <p>
+            We specialise in random, unusual and interesting finds.
+            From hidden gems to unexpected treasures, you never quite
+            know what might appear next.
+        </p>
+
+        <br>
+
+        <p>
+            Every item has a story. Every discovery is different.
+            That's the puzzle.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- REVIEWS -->
+
+<section class="reviews">
+
+    <div class="section-title">
+        <small>Customer Experiences</small>
+        <h2>What People Say</h2>
+    </div>
+
+    <div class="review-grid">
+
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+                "I genuinely had no idea what I was going to get.
+                That's what made opening it so much fun!"
+            </p>
+            <strong>— Sarah</strong>
+        </div>
+
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+                "The whole mystery concept is brilliant.
+                Can't wait to see what comes next."
+            </p>
+            <strong>— James</strong>
+        </div>
+
+        <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Found something I never would have expected.
+                Absolutely loved it."
+            </p>
+            <strong>— Emma</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section>
+
+    <div class="section-title">
+        <small>Questions</small>
+        <h2>Frequently Asked</h2>
+    </div>
+
+    <div class="faq">
+
+        <details>
+            <summary>What does DJ's Puzzles sell?</summary>
+            <p>
+                We sell a changing selection of random, unusual,
+                interesting and collectible items.
+            </p>
+        </details>
+
+        <details>
+            <summary>What are the mystery boxes?</summary>
+            <p>
+                Mystery boxes contain surprise items. The exact contents
+                aren't revealed beforehand — that's part of the fun.
+            </p>
+        </details>
+
+        <details>
+            <summary>Do you ship?</summary>
+            <p>
+                Shipping options will be displayed when your online
+                shop is fully set up.
+            </p>
+        </details>
+
+        <details>
+            <summary>How often do new items arrive?</summary>
+            <p>
+                Our selection changes regularly, so check back often
+                to see what's new.
+            </p>
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter">
+
+    <div class="section-title">
+        <small>Stay In The Know</small>
+        <h2>Be First To Discover What's Inside</h2>
+    </div>
+
+    <p>
+        Join the DJ's Puzzles mailing list for new finds,
+        mystery boxes and special announcements.
+    </p>
+
+    <form onsubmit="subscribe(event)">
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Your email address"
+            required
+        >
+
+        <button type="submit">
+            Join The Puzzle
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- SOCIAL -->
+
+<section class="social">
+
+    <div class="section-title">
+        <small>Follow The Hunt</small>
+        <h2>Find Us Online</h2>
+    </div>
+
+    <div class="social-links">
+
+        <a href="#" target="_blank">Instagram</a>
+
+        <a href="#" target="_blank">TikTok</a>
+
+        <a href="#" target="_blank">Facebook</a>
+
+        <a href="#" target="_blank">YouTube</a>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+    <div class="section-title">
+        <small>Contact</small>
+        <h2>Get In Touch</h2>
+    </div>
+
+    <p>
+        Have a question, spotted something you like,
+        or simply want to know what's inside?
+    </p>
+
+    <div class="contact-info">
+        📧 hello@djspuzzles.com
+    </div>
+
+    <a
+        href="mailto:hello@djspuzzles.com"
+        class="button"
+    >
+        Contact DJ's Puzzles
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>DJ's Puzzles</strong>.
+        Never know what you'll find inside.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* MYSTERY REVEAL */
+
+function revealMystery() {
+
+    const box = document.getElementById("giftBox");
+    const result = document.getElementById("revealResult");
+
+    const mysteries = [
+        "✨ A hidden treasure!",
+        "💎 Something rare!",
+        "🎮 A nostalgic surprise!",
+        "🕰️ A vintage discovery!",
+        "👑 Something luxurious!",
+        "🧩 Something completely unexpected!",
+        "🎁 A mystery within a mystery!"
+    ];
+
+    box.classList.remove("opened");
+
+    result.innerHTML = "Opening your mystery...";
+
+    setTimeout(function() {
+
+        box.classList.add("opened");
+
+        const random =
+            mysteries[Math.floor(Math.random() * mysteries.length)];
+
+        result.innerHTML = random;
+
+    }, 700);
+}
+
+
+/* SIMPLE CART DEMO */
+
+function addToCart(product) {
+
+    alert(
+        product +
+        " has been added to your collection!"
+    );
+
+}
+
+
+/* NEWSLETTER DEMO */
+
+function subscribe(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value;
+
+    alert(
+        "Welcome to DJ's Puzzles!\n\n" +
+        email +
+        " has been added to the list."
+    );
+
+    document.getElementById("email").value = "";
+
+}
+
+</script>
+
+</body>
+</html>
